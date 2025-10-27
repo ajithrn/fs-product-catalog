@@ -1,0 +1,182 @@
+/**
+ * Frontend Common Styles
+ * 
+ * Shared styles for all product pages
+ * 
+ * @package FS_Product_Catalog
+ */
+
+/* CSS Variables */
+:root {
+	/* Colors */
+	--fs-primary: #007bff;
+	--fs-primary-hover: #0056b3;
+	--fs-secondary: #6c757d;
+	--fs-text: #333;
+	--fs-text-light: #666;
+	--fs-text-lighter: #999;
+	--fs-border: #ddd;
+	--fs-border-light: #eee;
+	--fs-bg: #fff;
+	--fs-bg-alt: #f8f9fa;
+	--fs-bg-dark: #343a40;
+	--fs-success: #28a745;
+	--fs-danger: #dc3545;
+	--fs-warning: #ffc107;
+	--fs-info: #17a2b8;
+	
+	/* Spacing */
+	--fs-gap: 2rem;
+	--fs-gap-sm: 1rem;
+	--fs-gap-lg: 3rem;
+	--fs-gap-xl: 4rem;
+	
+	/* Layout */
+	--fs-container-width: 1200px;
+	--fs-sidebar-width: 280px;
+	--fs-border-radius: 4px;
+	--fs-border-radius-lg: 8px;
+	
+	/* Typography */
+	--fs-font-family: inherit;
+	--fs-font-size: 16px;
+	--fs-font-size-xs: 12px;
+	--fs-font-size-sm: 14px;
+	--fs-font-size-lg: 18px;
+	--fs-line-height: 1.6;
+	
+	/* Transitions */
+	--fs-transition: 0.3s ease;
+	--fs-transition-fast: 0.15s ease;
+	
+	/* Shadows */
+	--fs-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+	--fs-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	--fs-shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Container */
+.fs-product-container,
+.fs-product-archive-container {
+	max-width: var(--fs-container-width);
+	margin: 0 auto;
+	padding: var(--fs-gap);
+}
+
+/* Breadcrumbs */
+.fs-product-breadcrumbs {
+	margin-bottom: var(--fs-gap);
+	font-size: var(--fs-font-size-sm);
+}
+
+.fs-breadcrumb-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.fs-breadcrumb-item {
+	display: flex;
+	align-items: center;
+}
+
+.fs-breadcrumb-item:not(:last-child)::after {
+	content: "/";
+	margin-left: 0.5rem;
+	color: var(--fs-text-lighter);
+}
+
+.fs-breadcrumb-item a {
+	color: var(--fs-primary);
+	text-decoration: none;
+	transition: color var(--fs-transition-fast);
+}
+
+.fs-breadcrumb-item a:hover {
+	color: var(--fs-primary-hover);
+	text-decoration: underline;
+}
+
+.fs-breadcrumb-item.active span {
+	color: var(--fs-text-light);
+}
+
+/* Utility Classes */
+.fs-text-center {
+	text-align: center;
+}
+
+.fs-text-right {
+	text-align: right;
+}
+
+.fs-mb-0 {
+	margin-bottom: 0;
+}
+
+.fs-mb-1 {
+	margin-bottom: var(--fs-gap-sm);
+}
+
+.fs-mb-2 {
+	margin-bottom: var(--fs-gap);
+}
+
+.fs-mb-3 {
+	margin-bottom: var(--fs-gap-lg);
+}
+
+.fs-mt-0 {
+	margin-top: 0;
+}
+
+.fs-mt-1 {
+	margin-top: var(--fs-gap-sm);
+}
+
+.fs-mt-2 {
+	margin-top: var(--fs-gap);
+}
+
+.fs-mt-3 {
+	margin-top: var(--fs-gap-lg);
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1200px) {
+	:root {
+		--fs-container-width: 100%;
+	}
+}
+
+@media (max-width: 992px) {
+	:root {
+		--fs-gap: 1.5rem;
+		--fs-gap-lg: 2.5rem;
+		--fs-sidebar-width: 260px;
+	}
+}
+
+@media (max-width: 768px) {
+	:root {
+		--fs-gap: 1rem;
+		--fs-gap-lg: 2rem;
+		--fs-font-size: 15px;
+	}
+	
+	.fs-product-container,
+	.fs-product-archive-container {
+		padding: var(--fs-gap-sm);
+	}
+}
+
+@media (max-width: 576px) {
+	:root {
+		--fs-gap-sm: 0.75rem;
+		--fs-gap: 1rem;
+		--fs-gap-lg: 1.5rem;
+	}
+}

@@ -1,180 +1,140 @@
-# FluxStack Product Catalog Plugin
+# FluxStack Product Catalog
 
-A WordPress plugin for managing products without ecommerce functionality. Built with ACF Pro integration and following WordPress coding standards.
+A custom WordPress product catalog plugin without e-commerce functionality. Creates a custom post type for products with categories, brands, tags, and types.
 
 ## Features
 
-- **Custom Post Type**: Products (fs-products) with clean URLs (/products/)
-- **Custom Taxonomies**:
-  - Product Categories (hierarchical, with images)
-  - Product Brands (non-hierarchical, with images)
-  - Product Tags (non-hierarchical)
-  - Product Types (hierarchical, with images)
-- **ACF Integration**: Custom fields using ACF Pro with JSON storage
-- **Classic Editor**: Uses classic editor instead of block editor
-- **Admin Enhancements**: Custom columns, sortable fields, taxonomy images
+- **Custom Post Type**: Products with full WordPress editor support
+- **Taxonomies**: Categories (hierarchical), Brands, Types (hierarchical), and Tags
+- **ACF Integration**: Product information fields, specifications, and gallery
+- **Frontend Templates**: Fully customizable template system
+- **AJAX Filtering**: Real-time product filtering without page reload
+- **Infinite Scroll**: Automatic loading with load more button fallback
+- **Responsive Design**: Mobile-first approach with collapsible filters
+- **Lightbox Gallery**: Custom lightweight image gallery with keyboard navigation
+- **Specification Tabs**: Organized product specifications with tabbed interface
+- **Breadcrumb Navigation**: SEO-friendly breadcrumbs
+- **Template Override System**: Easy customization via theme directory
 
 ## Requirements
 
 - WordPress 5.8 or higher
 - PHP 7.4 or higher
-- ACF Pro plugin (required for custom fields)
+- Advanced Custom Fields PRO
 
 ## Installation
 
-1. Upload the `fs-product-catalog` folder to `/wp-content/plugins/`
-2. Ensure ACF Pro is installed and activated
-3. Activate the Product Catalog plugin through the 'Plugins' menu in WordPress
-4. Visit the Products menu in the WordPress admin
+1. Upload the plugin files to `/wp-content/plugins/fs-product-catalog/`
+2. Activate the plugin through the 'Plugins' menu in WordPress
+3. Ensure ACF Pro is installed and activated
 
-## Plugin Structure
+## Quick Start
 
-```
-fs-product-catalog/
-├── fs-product-catalog.php          # Main plugin file
-├── README.md                        # This file
-├── includes/
-│   ├── class-fs-product-cpt.php    # Custom Post Type registration
-│   ├── class-fs-product-taxonomies.php  # Taxonomy registration
-│   └── class-fs-product-acf.php    # ACF field management
-├── acf-json/
-│   └── group_fs_product_meta_fields.json  # ACF field definitions
-└── assets/
-    └── css/
-        └── admin.css                # Admin styling
-```
+After installation:
+1. Go to **Products** in WordPress admin
+2. Add your first product with title, content, and featured image
+3. Add product information and specifications using ACF fields
+4. Assign categories, brands, types, or tags
+5. View your product on the frontend
 
-## Custom Fields
+Visit the product archive at: `yoursite.com/product/`
 
-### WordPress Standard Fields
-- **Title**: Product name (WordPress default)
-- **Content Editor**: Product description (WordPress default classic editor)
-- **Featured Image**: Product main image (WordPress default)
+## Customization
 
-### ACF Custom Fields (JSON-based)
+### Template Override System
 
-#### Product Information Tab
-- **Product Information**: Repeater field (unlimited rows) with:
-  - Title (text)
-  - Content (WYSIWYG)
+The plugin uses a template hierarchy that allows you to override any template:
 
-#### Product Specifications Tab
-- **Specifications**: Repeater field (unlimited rows) with:
-  - Tab Title (text)
-  - Content (WYSIWYG with HTML support)
+1. **Theme Directory** (checked first): `{your-theme}/fs-product-catalog/`
+2. **Plugin Directory** (fallback): `{plugin}/templates/`
 
-**Note**: All ACF fields are stored in JSON format in the `acf-json/` directory for easy management and version control. Fields can be edited directly in WordPress admin under Custom Fields → Field Groups.
+**Example**: To customize the product card:
+1. Copy `{plugin}/templates/parts/loop/product-card.php`
+2. Paste to `{your-theme}/fs-product-catalog/parts/loop/product-card.php`
+3. Modify as needed
 
-## Taxonomies
+For a complete list of available templates, see [DEVELOPER.md](DEVELOPER.md#template-system)
 
-### Product Categories (fs-product-category)
-- Hierarchical (like categories)
-- Supports images via ACF
-- URL: `/product-category/`
+### CSS Customization
 
-### Product Brands (fs-product-brand)
-- Non-hierarchical (like tags)
-- Supports images via ACF
-- URL: `/product-brand/`
+The plugin uses CSS custom properties (variables) for easy styling:
 
-### Product Tags (fs-product-tag)
-- Non-hierarchical (like tags)
-- URL: `/product-tag/`
-
-### Product Types (fs-product-type)
-- Hierarchical (like categories)
-- Supports images via ACF
-- URL: `/product-type/`
-
-## Usage Examples
-
-### Get Products in Template
-
-```php
-// Get all products
-$products = FS_Product_CPT::get_products();
-
-// Get products by category
-$products = FS_Product_CPT::get_products_by_taxonomy(
-    'fs-product-category',
-    'category-slug',
-    10
-);
-
-// Get product information
-$product_info = FS_Product_ACF::get_product_info( $post_id );
-
-// Get specification tabs
-$spec_tabs = FS_Product_ACF::get_product_specifications_tabs( $post_id );
-```
-
-### Get Terms with Images
-
-```php
-// Get categories with images
-$categories = FS_Product_Taxonomies::get_terms_with_images( 'fs-product-category' );
-
-foreach ( $categories as $category ) {
-    echo $category->name;
-    if ( $category->image ) {
-        echo '<img src="' . esc_url( $category->image['url'] ) . '" />';
-    }
+```css
+/* Add to your theme's style.css */
+:root {
+	--fs-primary: #ff6b6b;        /* Change primary color */
+	--fs-gap: 1.5rem;             /* Adjust spacing */
+	--fs-border-radius: 8px;      /* Change border radius */
 }
 ```
 
-## ACF JSON
+For complete CSS documentation, see [DEVELOPER.md](DEVELOPER.md#css-architecture)
 
-The plugin uses ACF JSON for field synchronization:
-- Fields are stored in `/acf-json/` directory
-- Automatically loaded when plugin is active
-- Version control friendly
+### Hooks & Filters
 
-## Hooks and Filters
+Common customization examples:
 
-The plugin provides several hooks for customization:
+```php
+// Change products per page
+add_filter('fs_product_posts_per_page', function() {
+	return 24;
+});
 
-### Actions
-- `fs_product_catalog_init` - Fires when plugin components are initialized
+// Change archive columns
+add_filter('fs_product_archive_columns', function() {
+	return 4;
+});
 
-### Filters
-- `acf/settings/save_json` - Customize ACF JSON save location
-- `acf/settings/load_json` - Customize ACF JSON load locations
+// Add custom content after product
+add_action('fs_product_after_single_product', function() {
+	echo '<div class="custom-content">Your content here</div>';
+});
+```
 
-## Admin Features
+For complete hooks reference, see [DEVELOPER.md](DEVELOPER.md#hooks--filters-reference)
 
-### Custom Columns
-- Thumbnail preview
-- Categories, Brands, Types, Tags
-- Sortable columns
+## Product Structure
 
-### Taxonomy Images
-- Upload images for categories, brands, and types
-- Display in admin columns
-- Accessible via ACF fields
+### ACF Fields
+- **Product Information**: Repeater field with title and content
+- **Specifications**: Repeater field with tab title and content (tabbed interface)
+- **Gallery**: Multiple images with lightbox support
 
-## Development
+### Taxonomies
+- **Categories**: Hierarchical with image support
+- **Brands**: Non-hierarchical with image support
+- **Types**: Hierarchical with image support
+- **Tags**: Non-hierarchical
 
-### Coding Standards
-- Follows WordPress Coding Standards
-- PSR-4 autoloading structure
-- Proper escaping and sanitization
-- Translation-ready
+## Technical Features
 
-### File Naming
-- Internal name: `fs-products`
-- Public URLs: `/products/`
-- Taxonomy prefix: `fs-product-`
-- Field prefix: `field_fs_product_`
+- **AJAX Filtering**: Real-time search and filtering without page reload
+- **Infinite Scroll**: Automatic loading with Intersection Observer API
+- **Accessibility**: ARIA labels, keyboard navigation, screen reader support
+- **Performance**: Conditional asset loading, optimized queries
+- **Browser Support**: Modern browsers with IE11 graceful degradation
+- **Standards Compliant**: Follows WordPress PHP, JavaScript, and CSS coding standards
 
-## Support
+## Documentation
 
-For issues or questions, please contact the development team.
+- **[README.md](README.md)** - This file (user guide and quick start)
+- **[DEVELOPER.md](DEVELOPER.md)** - Complete technical documentation for developers
 
+## Changelog
+- **[CHANGELOG.md](CHANGELOG.md)** - Plugin Changelog
+
+## Support & Contributing
+
+- **Issues**: Report bugs via the plugin repository
+- **Contributing**: See [DEVELOPER.md](DEVELOPER.md#contributing) for guidelines
+- **Standards**: All code follows WordPress Coding Standards
 
 ## License
 
-GPL v2 or later
+GPL v2 or later - [License URI](https://www.gnu.org/licenses/gpl-2.0.html)
 
 ## Credits
 
-Developed by Ajith R N
+**Author**: Ajith R N  
+**Website**: [ajithrn.com](https://ajithrn.com)  
+**Plugin URI**: [ajithrn.com](https://ajithrn.com)
