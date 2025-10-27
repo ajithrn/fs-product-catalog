@@ -5,6 +5,48 @@ All notable changes to the FluxStack Product Catalog plugin will be documented i
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1] - 2025-01-27
+
+### Added
+- **Single Product Sidebar**: Optional sidebar for single product pages with search, categories, brands, types, and tags
+  - New template: `templates/parts/sidebar-single.php`
+  - Disabled by default, enable with `add_filter('fs_product_show_single_sidebar', '__return_true')`
+- **Display Filters for Product Cards**: Added filters to control visibility of product card elements
+  - `fs_product_card_show_category`: Show/hide category (default: true)
+  - `fs_product_card_show_excerpt`: Show/hide excerpt (default: true)
+  - `fs_product_card_show_more_link`: Show/hide "View Details" link (default: true)
+- **Single Sidebar Display Filters**: Added filters to control single product sidebar sections
+  - `fs_single_sidebar_show_search`: Show/hide search box (default: true)
+  - `fs_single_sidebar_show_categories`: Show/hide categories (default: true)
+  - `fs_single_sidebar_show_brands`: Show/hide brands (default: true)
+  - `fs_single_sidebar_show_types`: Show/hide types (default: true)
+  - `fs_single_sidebar_show_tags`: Show/hide tags (default: true)
+- **Archive Sidebar Display Filters**: Added filters to control archive sidebar sections
+  - `fs_archive_sidebar_show_search`: Show/hide search box (default: true)
+  - `fs_archive_sidebar_show_categories`: Show/hide categories (default: true)
+  - `fs_archive_sidebar_show_brands`: Show/hide brands (default: true)
+  - `fs_archive_sidebar_show_types`: Show/hide types (default: true)
+  - `fs_archive_sidebar_show_tags`: Show/hide tags (default: true)
+
+### Changed
+- **Product Card Styling**: Removed zoom effect on hover, only shows shadow
+- **Product Card Images**: Changed from 3:4 aspect ratio to 1:1 (square)
+- **Product Card Title**: Increased font size by 5% (1.1rem → 1.155rem)
+- **Product Card Category**: Hidden by default in grid view (can be re-enabled with filter)
+- **Font Family**: Changed to `inherit` to use theme fonts instead of system fonts
+- **Single Product Sidebar Position**: Changed default position from right to left
+
+### Technical
+- Updated `assets/js/frontend-archive.js`: Fixed AJAX array parameter handling in both `applyFilters()` and `loadMore()` functions
+- Updated `assets/css/frontend-archive.css`: Removed hover transforms, changed image aspect ratio, hidden category, increased title size
+- Updated `assets/css/frontend-common.css`: Changed font-family to inherit
+- Updated `assets/css/frontend-single.css`: Added complete sidebar styling with responsive design
+- Updated `templates/single-product.php`: Added sidebar layout support
+- Updated `templates/parts/loop/product-card.php`: Added display filters for card elements
+- Updated `templates/parts/sidebar-filters.php`: Added visibility checks for archive sidebar sections
+- Updated `includes/class-fs-product-frontend.php`: Added methods for single and archive sidebar control, display filters
+- Updated `DEVELOPER.md`: Added documentation for new filters and features
+
 ## [1.1.0] - 2025-01-27
 
 ### Added
@@ -140,5 +182,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Version History
 
+- **1.1.1** (2025-01-27): Bug fixes, single product sidebar, display filters, styling improvements
 - **1.1.0** (2025-01-27): Frontend template system, AJAX filtering, infinite scroll
 - **1.0.0** (2025-01-27): Initial release with custom post type and admin features

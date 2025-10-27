@@ -239,6 +239,118 @@ class FS_Product_Frontend {
 	}
 
 	/**
+	 * Check if single product sidebar should be shown
+	 *
+	 * @return bool
+	 */
+	public static function show_single_sidebar() {
+		if ( ! is_singular( 'fs-products' ) ) {
+			return false;
+		}
+		return apply_filters( 'fs_product_show_single_sidebar', false );
+	}
+
+	/**
+	 * Get single product sidebar position
+	 *
+	 * @return string
+	 */
+	public static function get_single_sidebar_position() {
+		$position = apply_filters( 'fs_product_single_sidebar_position', 'left' );
+		return in_array( $position, array( 'left', 'right' ), true ) ? $position : 'left';
+	}
+
+	/**
+	 * Check if single sidebar search should be shown
+	 *
+	 * @return bool
+	 */
+	public static function show_single_sidebar_search() {
+		return apply_filters( 'fs_single_sidebar_show_search', true );
+	}
+
+	/**
+	 * Check if single sidebar categories should be shown
+	 *
+	 * @return bool
+	 */
+	public static function show_single_sidebar_categories() {
+		return apply_filters( 'fs_single_sidebar_show_categories', true );
+	}
+
+	/**
+	 * Check if single sidebar brands should be shown
+	 *
+	 * @return bool
+	 */
+	public static function show_single_sidebar_brands() {
+		return apply_filters( 'fs_single_sidebar_show_brands', true );
+	}
+
+	/**
+	 * Check if single sidebar types should be shown
+	 *
+	 * @return bool
+	 */
+	public static function show_single_sidebar_types() {
+		return apply_filters( 'fs_single_sidebar_show_types', true );
+	}
+
+	/**
+	 * Check if single sidebar tags should be shown
+	 *
+	 * @return bool
+	 */
+	public static function show_single_sidebar_tags() {
+		return apply_filters( 'fs_single_sidebar_show_tags', true );
+	}
+
+	/**
+	 * Check if archive sidebar search should be shown
+	 *
+	 * @return bool
+	 */
+	public static function show_archive_sidebar_search() {
+		return apply_filters( 'fs_archive_sidebar_show_search', true );
+	}
+
+	/**
+	 * Check if archive sidebar categories should be shown
+	 *
+	 * @return bool
+	 */
+	public static function show_archive_sidebar_categories() {
+		return apply_filters( 'fs_archive_sidebar_show_categories', true );
+	}
+
+	/**
+	 * Check if archive sidebar brands should be shown
+	 *
+	 * @return bool
+	 */
+	public static function show_archive_sidebar_brands() {
+		return apply_filters( 'fs_archive_sidebar_show_brands', true );
+	}
+
+	/**
+	 * Check if archive sidebar types should be shown
+	 *
+	 * @return bool
+	 */
+	public static function show_archive_sidebar_types() {
+		return apply_filters( 'fs_archive_sidebar_show_types', true );
+	}
+
+	/**
+	 * Check if archive sidebar tags should be shown
+	 *
+	 * @return bool
+	 */
+	public static function show_archive_sidebar_tags() {
+		return apply_filters( 'fs_archive_sidebar_show_tags', true );
+	}
+
+	/**
 	 * Get product thumbnail size
 	 *
 	 * @return string|array

@@ -32,23 +32,25 @@ $product_id = get_the_ID();
 			
 			<?php
 			$categories = get_the_terms( $product_id, 'fs-product-category' );
-			if ( ! empty( $categories ) && ! is_wp_error( $categories ) ) :
+			if ( ! empty( $categories ) && ! is_wp_error( $categories ) && apply_filters( 'fs_product_card_show_category', true ) ) :
 				?>
 				<div class="fs-product-card-category">
 					<?php echo esc_html( $categories[0]->name ); ?>
 				</div>
 			<?php endif; ?>
 			
-			<?php if ( has_excerpt() ) : ?>
+			<?php if ( has_excerpt() && apply_filters( 'fs_product_card_show_excerpt', true ) ) : ?>
 				<div class="fs-product-card-excerpt">
 					<?php echo wp_kses_post( get_the_excerpt() ); ?>
 				</div>
 			<?php endif; ?>
 			
-			<span class="fs-product-card-more">
-				<?php esc_html_e( 'View Details', 'fs-product-catalog' ); ?>
-				<span aria-hidden="true">→</span>
-			</span>
+			<?php if ( apply_filters( 'fs_product_card_show_more_link', true ) ) : ?>
+				<span class="fs-product-card-more">
+					<?php esc_html_e( 'View Details', 'fs-product-catalog' ); ?>
+					<span aria-hidden="true">→</span>
+				</span>
+			<?php endif; ?>
 		</div>
 	</a>
 </article>

@@ -318,8 +318,33 @@ apply_filters('fs_product_sidebar_position', 'left');
 // Show breadcrumbs (default: true)
 apply_filters('fs_product_show_breadcrumbs', true);
 
-// Show sidebar (default: true)
+// Show sidebar on archive pages (default: true)
 apply_filters('fs_product_show_sidebar', true);
+
+// Show sidebar on single product pages (default: false)
+apply_filters('fs_product_show_single_sidebar', false);
+
+// Single product sidebar position (default: 'left')
+apply_filters('fs_product_single_sidebar_position', 'left');
+
+// Single sidebar sections visibility (default: true for all)
+apply_filters('fs_single_sidebar_show_search', true);
+apply_filters('fs_single_sidebar_show_categories', true);
+apply_filters('fs_single_sidebar_show_brands', true);
+apply_filters('fs_single_sidebar_show_types', true);
+apply_filters('fs_single_sidebar_show_tags', true);
+
+// Archive sidebar sections visibility (default: true for all)
+apply_filters('fs_archive_sidebar_show_search', true);
+apply_filters('fs_archive_sidebar_show_categories', true);
+apply_filters('fs_archive_sidebar_show_brands', true);
+apply_filters('fs_archive_sidebar_show_types', true);
+apply_filters('fs_archive_sidebar_show_tags', true);
+
+// Product card elements visibility (default: true for all)
+apply_filters('fs_product_card_show_category', true);
+apply_filters('fs_product_card_show_excerpt', true);
+apply_filters('fs_product_card_show_more_link', true);
 
 // Thumbnail size (default: 'large')
 apply_filters('fs_product_thumbnail_size', 'large');
@@ -938,4 +963,4 @@ When contributing code:
 ---
 
 **Last Updated**: 2025-01-27
-**Version**: 1.1.0
+**Version**: 1.1.1

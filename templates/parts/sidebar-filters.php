@@ -52,20 +52,22 @@ $tags = get_terms(
 	
 	<div class="fs-filters-content">
 		<!-- Search Filter -->
-		<div class="fs-filter-group fs-filter-search">
-			<h4 class="fs-filter-title"><?php esc_html_e( 'Search', 'fs-product-catalog' ); ?></h4>
-			<div class="fs-filter-content">
-				<input 
-					type="search" 
-					class="fs-search-input" 
-					placeholder="<?php esc_attr_e( 'Search products...', 'fs-product-catalog' ); ?>"
-					aria-label="<?php esc_attr_e( 'Search products', 'fs-product-catalog' ); ?>"
-				/>
+		<?php if ( FS_Product_Frontend::show_archive_sidebar_search() ) : ?>
+			<div class="fs-filter-group fs-filter-search">
+				<h4 class="fs-filter-title"><?php esc_html_e( 'Search', 'fs-product-catalog' ); ?></h4>
+				<div class="fs-filter-content">
+					<input 
+						type="search" 
+						class="fs-search-input" 
+						placeholder="<?php esc_attr_e( 'Search products...', 'fs-product-catalog' ); ?>"
+						aria-label="<?php esc_attr_e( 'Search products', 'fs-product-catalog' ); ?>"
+					/>
+				</div>
 			</div>
-		</div>
+		<?php endif; ?>
 		
 		<!-- Categories Filter -->
-		<?php if ( ! empty( $categories ) && ! is_wp_error( $categories ) ) : ?>
+		<?php if ( FS_Product_Frontend::show_archive_sidebar_categories() && ! empty( $categories ) && ! is_wp_error( $categories ) ) : ?>
 			<div class="fs-filter-group fs-filter-categories">
 				<h4 class="fs-filter-title">
 					<?php esc_html_e( 'Categories', 'fs-product-catalog' ); ?>
@@ -93,7 +95,7 @@ $tags = get_terms(
 		<?php endif; ?>
 		
 		<!-- Brands Filter -->
-		<?php if ( ! empty( $brands ) && ! is_wp_error( $brands ) ) : ?>
+		<?php if ( FS_Product_Frontend::show_archive_sidebar_brands() && ! empty( $brands ) && ! is_wp_error( $brands ) ) : ?>
 			<div class="fs-filter-group fs-filter-brands">
 				<h4 class="fs-filter-title">
 					<?php esc_html_e( 'Brands', 'fs-product-catalog' ); ?>
@@ -121,7 +123,7 @@ $tags = get_terms(
 		<?php endif; ?>
 		
 		<!-- Types Filter -->
-		<?php if ( ! empty( $types ) && ! is_wp_error( $types ) ) : ?>
+		<?php if ( FS_Product_Frontend::show_archive_sidebar_types() && ! empty( $types ) && ! is_wp_error( $types ) ) : ?>
 			<div class="fs-filter-group fs-filter-types">
 				<h4 class="fs-filter-title">
 					<?php esc_html_e( 'Types', 'fs-product-catalog' ); ?>
@@ -149,7 +151,7 @@ $tags = get_terms(
 		<?php endif; ?>
 		
 		<!-- Tags Filter -->
-		<?php if ( ! empty( $tags ) && ! is_wp_error( $tags ) ) : ?>
+		<?php if ( FS_Product_Frontend::show_archive_sidebar_tags() && ! empty( $tags ) && ! is_wp_error( $tags ) ) : ?>
 			<div class="fs-filter-group fs-filter-tags">
 				<h4 class="fs-filter-title">
 					<?php esc_html_e( 'Tags', 'fs-product-catalog' ); ?>
