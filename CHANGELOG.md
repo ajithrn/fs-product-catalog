@@ -5,6 +5,34 @@ All notable changes to the FluxStack Product Catalog plugin will be documented i
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.2] - 2025-10-28
+
+### Added
+- **Fluid Typography System**: Modern responsive typography using CSS `clamp()` and relative units
+  - Base font size scales fluidly from 15px (mobile) to 17px (desktop)
+  - All font sizes use `em` units for proportional scaling
+  - Fluid heading sizes (H1-H6) that scale smoothly with viewport
+  - Theme-independent typography scoped to plugin containers only
+
+### Changed
+- **Typography Architecture**: Complete overhaul of font sizing system
+  - Replaced fixed `px` units with relative `em` units throughout
+  - Implemented viewport-based fluid scaling using `clamp()`
+  - Added comprehensive font size scale (xs, sm, base, lg, xl, 2xl, 3xl, 4xl, 5xl)
+  - Added line-height variables (default, tight, relaxed)
+  - Removed breakpoint-specific font size overrides (now handled by fluid scaling)
+
+### Technical
+- Updated `assets/css/frontend-common.css`: 
+  - Added fluid typography system with CSS custom properties
+  - Implemented `clamp()` for base font size and all headings
+  - Scoped base font size to plugin containers to avoid theme conflicts
+  - Added comprehensive font size scale using `em` units
+- Updated `assets/css/frontend-archive.css`: Converted all font sizes to use CSS variables
+- Updated `assets/css/frontend-single.css`: Converted all font sizes to use CSS variables
+- Updated `DEVELOPER.md`: Added comprehensive fluid typography documentation section
+
+
 ## [1.1.1] - 2025-01-27
 
 ### Added
@@ -182,6 +210,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Version History
 
+- **1.1.3** (2025-10-28): Fluid typography system with responsive font scaling
 - **1.1.1** (2025-01-27): Bug fixes, single product sidebar, display filters, styling improvements
 - **1.1.0** (2025-01-27): Frontend template system, AJAX filtering, infinite scroll
 - **1.0.0** (2025-01-27): Initial release with custom post type and admin features

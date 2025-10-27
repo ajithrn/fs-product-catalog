@@ -500,10 +500,36 @@ echo wp_kses_post($html);
     --fs-sidebar-width: 280px;
     --fs-border-radius: 4px;
     
-    /* Typography */
-    --fs-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    --fs-font-size: 16px;
+    /* Fluid Typography System */
+    /* Base font size scales fluidly between 15px (mobile) and 17px (desktop) */
+    --fs-font-size-base: clamp(15px, 0.9375rem + 0.3125vw, 17px);
+    
+    /* Font family */
+    --fs-font-family: inherit;
+    
+    /* Relative font sizes based on container's base (using em for proper inheritance) */
+    --fs-font-size-xs: 0.75em;   /* 12px at base 16px */
+    --fs-font-size-sm: 0.875em;  /* 14px at base 16px */
+    --fs-font-size: 1em;         /* 16px at base 16px - default */
+    --fs-font-size-lg: 1.125em;  /* 18px at base 16px */
+    --fs-font-size-xl: 1.25em;   /* 20px at base 16px */
+    --fs-font-size-2xl: 1.5em;   /* 24px at base 16px */
+    --fs-font-size-3xl: 1.875em; /* 30px at base 16px */
+    --fs-font-size-4xl: 2.25em;  /* 36px at base 16px */
+    --fs-font-size-5xl: 3em;     /* 48px at base 16px */
+    
+    /* Fluid heading sizes (relative to base font size using em) */
+    --fs-h1: clamp(1.75em, 1.5em + 1.25vw, 2.5em);    /* ~28px - 40px at 16px base */
+    --fs-h2: clamp(1.5em, 1.3em + 1vw, 2em);          /* ~24px - 32px at 16px base */
+    --fs-h3: clamp(1.25em, 1.1em + 0.75vw, 1.75em);   /* ~20px - 28px at 16px base */
+    --fs-h4: clamp(1.125em, 1em + 0.625vw, 1.5em);    /* ~18px - 24px at 16px base */
+    --fs-h5: clamp(1em, 0.95em + 0.25vw, 1.25em);     /* ~16px - 20px at 16px base */
+    --fs-h6: clamp(0.875em, 0.85em + 0.125vw, 1.0625em); /* ~14px - 17px at 16px base */
+    
+    /* Line heights */
     --fs-line-height: 1.6;
+    --fs-line-height-tight: 1.3;
+    --fs-line-height-relaxed: 1.8;
     
     /* Transitions */
     --fs-transition: 0.3s ease;
@@ -511,6 +537,82 @@ echo wp_kses_post($html);
     
     /* Shadows */
     --fs-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Apply base font size to plugin containers only (scoped to avoid theme conflicts) */
+.fs-product-container,
+.fs-product-archive-container,
+.fs-product-single-layout {
+    font-size: var(--fs-font-size-base);
+}
+```
+
+### Fluid Typography System (v1.1.2+)
+
+The plugin uses a modern fluid typography system that provides:
+
+**Key Features**:
+- **Fluid base font size**: Scales smoothly from 15px (mobile) to 17px (desktop)
+- **Relative units**: All font sizes use `em` units relative to the base
+- **Viewport-based scaling**: Uses CSS `clamp()` for responsive sizing
+- **Theme-independent**: Scoped to plugin containers only
+- **Proportional scaling**: All typography scales together harmoniously
+
+**How It Works**:
+
+1. **Base Font Size**:
+   ```css
+   --fs-font-size-base: clamp(15px, 0.9375rem + 0.3125vw, 17px);
+   ```
+   - Minimum: 15px (on small screens)
+   - Preferred: Calculated based on viewport width
+   - Maximum: 17px (on large screens)
+
+2. **Relative Sizing**:
+   ```css
+   --fs-font-size-sm: 0.875em;  /* 87.5% of base */
+   --fs-font-size: 1em;         /* 100% of base */
+   --fs-font-size-lg: 1.125em;  /* 112.5% of base */
+   ```
+
+3. **Fluid Headings**:
+   ```css
+   --fs-h1: clamp(1.75em, 1.5em + 1.25vw, 2.5em);
+   ```
+   - Scales between 1.75× and 2.5× the base font size
+   - Smooth transition based on viewport width
+
+**Benefits**:
+- ✅ Responsive without media queries
+- ✅ Accessible (respects user font preferences)
+- ✅ Maintainable (single source of truth)
+- ✅ No theme conflicts (scoped to plugin)
+- ✅ Smooth scaling across all devices
+
+**Customizing Typography**:
+
+To adjust the base font size range:
+```css
+:root {
+    /* Make text larger overall */
+    --fs-font-size-base: clamp(16px, 1rem + 0.5vw, 18px);
+}
+```
+
+To adjust specific heading sizes:
+```css
+:root {
+    /* Make H1 larger */
+    --fs-h1: clamp(2em, 1.75em + 1.5vw, 3em);
+}
+```
+
+To override for specific elements:
+```css
+.fs-product-title {
+    font-size: var(--fs-h1);
+    /* or use a custom size */
+    font-size: clamp(2rem, 2rem + 1vw, 3rem);
 }
 ```
 
@@ -962,5 +1064,5 @@ When contributing code:
 
 ---
 
-**Last Updated**: 2025-01-27
-**Version**: 1.1.1
+**Last Updated**: 2025-10-28
+**Version**: 1.1.2

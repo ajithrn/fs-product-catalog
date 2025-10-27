@@ -45,7 +45,7 @@
 }
 
 .fs-sidebar-title {
-	font-size: 1rem;
+	font-size: var(--fs-font-size);
 	margin: 0 0 var(--fs-gap-sm);
 	color: var(--fs-text);
 }
@@ -120,7 +120,7 @@
 
 .fs-sidebar-count {
 	color: var(--fs-text-lighter);
-	font-size: 0.85em;
+	font-size: var(--fs-font-size-sm);
 }
 
 /* Sidebar Tags */
@@ -154,10 +154,10 @@
 }
 
 .fs-product-title {
-	font-size: 2rem;
+	font-size: var(--fs-h2);
 	margin: 0 0 var(--fs-gap-sm);
 	color: var(--fs-text);
-	line-height: 1.2;
+	line-height: var(--fs-line-height-tight);
 }
 
 .fs-product-meta {
@@ -277,7 +277,7 @@
 }
 
 .fs-no-image-placeholder {
-	font-size: 4rem;
+	font-size: var(--fs-font-size-4xl);
 	color: var(--fs-border);
 }
 
@@ -320,7 +320,7 @@
 	height: 50px;
 	border-radius: 50%;
 	cursor: pointer;
-	font-size: 2rem;
+	font-size: var(--fs-h2);
 	line-height: 1;
 	display: flex;
 	align-items: center;
@@ -383,7 +383,7 @@
 }
 
 .fs-product-info-title {
-	font-size: 1.5rem;
+	font-size: var(--fs-h3);
 	margin: 0 0 var(--fs-gap);
 	color: var(--fs-text);
 }
@@ -405,7 +405,7 @@
 }
 
 .fs-info-item-title {
-	font-size: 1.1rem;
+	font-size: var(--fs-h6);
 	margin: 0 0 0.5rem;
 	color: var(--fs-text);
 }
@@ -421,7 +421,7 @@
 }
 
 .fs-product-specs-title {
-	font-size: 1.75rem;
+	font-size: var(--fs-h2);
 	margin: 0 0 var(--fs-gap);
 	color: var(--fs-text);
 }
@@ -485,17 +485,9 @@
 		grid-template-columns: 1fr;
 		gap: var(--fs-gap);
 	}
-	
-	.fs-product-title {
-		font-size: 1.75rem;
-	}
 }
 
 @media (max-width: 768px) {
-	.fs-product-title {
-		font-size: 1.5rem;
-	}
-	
 	.fs-product-info {
 		padding: var(--fs-gap-sm);
 	}
@@ -510,7 +502,7 @@
 	.fs-lightbox-next {
 		width: 40px;
 		height: 40px;
-		font-size: 1.5rem;
+		font-size: var(--fs-h3);
 	}
 }
 
